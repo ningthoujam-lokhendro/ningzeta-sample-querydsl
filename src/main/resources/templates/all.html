@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Querydsl Example</title>
+    <!-- Bootstrap -->
+    <link th:href="@{/webjars/bootstrap/3.3.1/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+</head>
+
+<body>
+	
+	<div class="container">
+		<h1 class="text-center">
+			<a href="/">
+				<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+			</a>
+		</h1>
+		<h1 class="text-center"><span class="label label-info" th:text="${title}"></span></h1>
+		<table class="table table-hover table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Age</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="cus,iterationStatus : ${customers}">
+					<td th:text="${iterationStatus.count}" class="col-md-1"/>
+					<td><a th:href="@{/info(name=${cus.name})}" th:text="${cus.name}" class="col-md-4"></a></td>
+					<td th:text="${cus.age}" class="col-md-1"/>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+<script th:src="@{/webjars/bootstrap/3.3.1/js/bootstrap.min.js}"></script>	
+</body>
+</html>

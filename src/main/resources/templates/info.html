@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Querydsl Example</title>
+    <!-- Bootstrap -->
+    <link th:href="@{/webjars/bootstrap/3.3.1/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/flag-icon-css/0.7.1/css/flag-icon.min.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/flag-icon-css/0.7.1/assets/docs.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+	<div class="container">
+		<h1 class="text-center">
+			<a href="/">
+				<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+			</a>
+		</h1>
+	
+		<h1 class="text-center"><span class="label label-info">Customers Information</span></h1>
+		<div class="row">
+		  <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
+            <div class="flag-wrapper">
+              <div th:class="'img-thumbnail flag flag-icon-background flag-icon-'+${country.code}"></div>
+            </div>
+          </div>
+		  <div class="col-md-4">
+		  	<dl class="dl-horizontal">
+			  <dt>Name</dt><dd th:text="${customer.name}"></dd>
+			  <dt>Age</dt><dd th:text="${customer.age}"></dd>
+			  <dt>Country</dt><dd th:text="${country.name}"></dd>
+			</dl>
+		  </div>
+		</div>
+	</div>
+
+<script th:src="@{/webjars/bootstrap/3.3.1/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/flag-icon-css/0.7.1/assets/docs.js}"></script>	
+</body>
+</html>
