@@ -45,3 +45,11 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+#usual maven-java project ignore list
+.settings
+.classpath
+.project
+.springBeans
+generated-sources
+/target/
