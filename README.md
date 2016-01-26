@@ -16,6 +16,7 @@ Meta-model are generated using maven plugin [maven-apt-plugin](https://github.co
 * Display all the customers sorted.
 * Display list of customer from a certain country.
 * Display a customer information and which country belongs to with the country flag.
+* Display all customer within an age-range.
 
 ## Technology use
 * Spring-Boot
