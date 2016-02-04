@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Ningzeta-sample-querydsl by ningthoujam-lokhendro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Ningzeta-sample-querydsl</h1>
+      <h2 class="project-tagline">Usage of querydsl with spring JPA</h2>
+      <a href="https://github.com/ningthoujam-lokhendro/ningzeta-sample-querydsl" class="btn">View on GitHub</a>
+      <a href="https://github.com/ningthoujam-lokhendro/ningzeta-sample-querydsl/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/ningthoujam-lokhendro/ningzeta-sample-querydsl/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="ningzeta-sample-querydsl" class="anchor" href="#ningzeta-sample-querydsl" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>NingZeta-Sample-Querydsl</h1>
+
+<p>General usage example of querydsl with Spring JPA.</p>
+
+<p>Meta-model are generated using maven plugin <a href="https://github.com/querydsl/apt-maven-plugin">maven-apt-plugin</a>.</p>
+
+<h4>
+<a id="description" class="anchor" href="#description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Description:</h4>
+
+<p><strong>Entity</strong></p>
+
+<ul>
+<li>
+<em>Customer:</em> Information for customer.</li>
+<li>
+<em>Country:</em> Name and ISO <a href="http://www.iso.org/iso/country_names_and_code_elements">3166-1-alpha-2 code</a>
+</li>
+</ul>
+
+<p><strong>Data File</strong></p>
+
+<ul>
+<li>Located at : <code>src\main\resources\data.sql</code>. It will be automatically loaded into the <em>embedded H2 DB</em> at spring-boot start up.</li>
+</ul>
+
+<p><strong>Use-Case</strong></p>
+
+<ul>
+<li>Display all the customers sorted.</li>
+<li>Display list of customer from a certain country.</li>
+<li>Display a customer information and which country belongs to with the country flag.</li>
+<li>Display all customer within an age-range.</li>
+</ul>
+
+<h2>
+<a id="technology-use" class="anchor" href="#technology-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Technology use</h2>
+
+<ul>
+<li>Spring-Boot</li>
+<li>Spring Data JPA</li>
+<li>Querydsl</li>
+<li>Embedded H2 database</li>
+<li>Thymleaf (Templating)</li>
+<li>Bootstrap (Easy UI)</li>
+<li>Flag-icon-css (flag svg)</li>
+</ul>
+
+<p>Refer to <code>pom.xml</code> for details.</p>
+
+<h2>
+<a id="requirement" class="anchor" href="#requirement" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirement</h2>
+
+<ul>
+<li>Maven 3.x</li>
+<li>Java 1.7+</li>
+</ul>
+
+<h2>
+<a id="how-to-" class="anchor" href="#how-to-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to ?</h2>
+
+<p>1) Describe the Entiy and <strong>Annotate</strong> with <a href="https://github.com/Entity" class="user-mention">@Entity</a>.</p>
+
+<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Entity</span>
+<span class="pl-k">class</span> <span class="pl-en">Country</span> {
+   <span class="pl-c1">...</span>
+}</pre></div>
+
+<p>2) Add the maven dependency.</p>
+
+<div class="highlight highlight-text-xml"><pre><span class="pl-c">&lt;!-- Querydsl dependencies --&gt;</span>
+ &lt;<span class="pl-ent">dependency</span>&gt;
+    &lt;<span class="pl-ent">groupId</span>&gt;com.mysema.querydsl&lt;/<span class="pl-ent">groupId</span>&gt;
+    &lt;<span class="pl-ent">artifactId</span>&gt;querydsl-apt&lt;/<span class="pl-ent">artifactId</span>&gt;
+    &lt;<span class="pl-ent">version</span>&gt;${querydsl.version}&lt;/<span class="pl-ent">version</span>&gt;
+&lt;/<span class="pl-ent">dependency</span>&gt;
+&lt;<span class="pl-ent">dependency</span>&gt;
+    &lt;<span class="pl-ent">groupId</span>&gt;com.mysema.querydsl&lt;/<span class="pl-ent">groupId</span>&gt;
+    &lt;<span class="pl-ent">artifactId</span>&gt;querydsl-jpa&lt;/<span class="pl-ent">artifactId</span>&gt;
+    &lt;<span class="pl-ent">version</span>&gt;${querydsl.version}&lt;/<span class="pl-ent">version</span>&gt;
+&lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
+
+<p>3) Generate the meta-model using maven plugin.</p>
+
+<div class="highlight highlight-text-xml"><pre><span class="pl-c">&lt;!-- Generate meta-model classes --&gt;</span>
+&lt;<span class="pl-ent">plugin</span>&gt;
+  &lt;<span class="pl-ent">groupId</span>&gt;com.mysema.maven&lt;/<span class="pl-ent">groupId</span>&gt;
+  &lt;<span class="pl-ent">artifactId</span>&gt;maven-apt-plugin&lt;/<span class="pl-ent">artifactId</span>&gt;
+  &lt;<span class="pl-ent">version</span>&gt;1.0.4&lt;/<span class="pl-ent">version</span>&gt;
+  &lt;<span class="pl-ent">executions</span>&gt;
+    &lt;<span class="pl-ent">execution</span>&gt;
+      &lt;<span class="pl-ent">phase</span>&gt;generate-sources&lt;/<span class="pl-ent">phase</span>&gt;
+      &lt;<span class="pl-ent">goals</span>&gt;
+        &lt;<span class="pl-ent">goal</span>&gt;process&lt;/<span class="pl-ent">goal</span>&gt;
+      &lt;/<span class="pl-ent">goals</span>&gt;
+      &lt;<span class="pl-ent">configuration</span>&gt;
+        &lt;<span class="pl-ent">outputDirectory</span>&gt;generated-sources&lt;/<span class="pl-ent">outputDirectory</span>&gt;
+        &lt;<span class="pl-ent">processor</span>&gt;com.mysema.query.apt.jpa.JPAAnnotationProcessor&lt;/<span class="pl-ent">processor</span>&gt;
+      &lt;/<span class="pl-ent">configuration</span>&gt;
+    &lt;/<span class="pl-ent">execution</span>&gt;
+  &lt;/<span class="pl-ent">executions</span>&gt;
+&lt;/<span class="pl-ent">plugin</span>&gt;</pre></div>
+
+<p>The generated meta-model will appears under the generated-sources at the base of the maven project. I like to use in ide with class-path so its not under target directory.</p>
+
+<p>Generate the sources with <code>mvn generate-sources</code></p>
+
+<p>3) Now extends the custom repository with the <code>org.springframework.data.querydsl.QueryDslPredicateExecutor</code>.</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">public</span> <span class="pl-k">interface</span> <span class="pl-en">CountryRepository</span> <span class="pl-k">extends</span> <span class="pl-e">JpaRepository&lt;<span class="pl-smi">Country</span>, <span class="pl-smi">Long</span>&gt;</span>,
+                                            <span class="pl-e">QueryDslPredicateExecutor&lt;<span class="pl-smi">Country</span>&gt;</span>{
+}</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p><code>mvn clean spring-boot:run</code> and hit the url <code>http://localhost:8080</code></p>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
+
+<ol>
+<li>Fork it!</li>
+<li>Create your feature branch: <code>git checkout -b my-new-feature</code>
+</li>
+<li>Commit your changes: <code>git commit -am 'Add some feature'</code>
+</li>
+<li>Push to the branch: <code>git push origin my-new-feature</code>
+</li>
+<li>Submit a pull request :D</li>
+</ol>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/ningthoujam-lokhendro/ningzeta-sample-querydsl">Ningzeta-sample-querydsl</a> is maintained by <a href="https://github.com/ningthoujam-lokhendro">ningthoujam-lokhendro</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
